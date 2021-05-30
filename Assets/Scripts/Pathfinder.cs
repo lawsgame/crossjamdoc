@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,33 +11,36 @@ public class Pathfinder : MonoBehaviour
     [SerializeField] private Tilemap worldMap;
 
     private Node rootNode;
-    private Dictionary<Vector2Int, Node> network;
-
+    private Dictionary<Vector3Int, Node> network;
 
     public Node RootNode => rootNode;
+    public Tilemap WorldMap => worldMap;
 
-    void Start()
+    void Awake()
     {
         BuildNetwork();
     }
 
     public void BuildNetwork()
     {
-        rootNode = new Node(initTileX, initTileY);
-        network = new Dictionary<Vector2Int, Node>();
+        rootNode = new Node(initTileX, initTileY, TILE_Z);
+        network = new Dictionary<Vector3Int, Node>();
         ExpandNetwork(rootNode, null);
 
-        foreach (KeyValuePair<Vector2Int, Node> entry in network)
+        foreach (KeyValuePair<Vector3Int, Node> entry in network)
         {
             Debug.Log(entry.Value.ToLongString());
         }
     }
-    
+
+
+    public Node FindNode(Vector3Int cellpos) => network[cellpos];
+
 
     void ExpandNetwork(Node currentNode, Node previousNode)
     {
         Vector3Int initCell = new Vector3Int(currentNode.Position.x, currentNode.Position.y, TILE_Z);
-        if (!worldMap.HasTile(initCell)) 
+        if (!worldMap.HasTile(initCell))
             return;
         WorldTile initTile = worldMap.GetTile<WorldTile>(initCell);
         if (!initTile.Traversable)
@@ -47,19 +49,19 @@ public class Pathfinder : MonoBehaviour
             return;
 
         network.Add(currentNode.Position, currentNode);
-        if(previousNode != null)
+        if (previousNode != null)
             previousNode.Children.Add(currentNode);
 
-        Node nextNode1 = new Node(currentNode.Position.x + 1, currentNode.Position.y);
+        Node nextNode1 = new Node(currentNode.Position.x + 1, currentNode.Position.y, currentNode.Position.z);
         if (!nextNode1.Equals(previousNode))
             ExpandNetwork(nextNode1, currentNode);
-        Node nextNode2 = new Node(currentNode.Position.x, currentNode.Position.y + 1);
+        Node nextNode2 = new Node(currentNode.Position.x, currentNode.Position.y + 1, currentNode.Position.z);
         if (!nextNode2.Equals(previousNode))
             ExpandNetwork(nextNode2, currentNode);
-        Node nextNode3 = new Node(currentNode.Position.x - 1, currentNode.Position.y);
+        Node nextNode3 = new Node(currentNode.Position.x - 1, currentNode.Position.y, currentNode.Position.z);
         if (!nextNode3.Equals(previousNode))
             ExpandNetwork(nextNode3, currentNode);
-        Node nextNode4 = new Node(currentNode.Position.x, currentNode.Position.y - 1);
+        Node nextNode4 = new Node(currentNode.Position.x, currentNode.Position.y - 1, currentNode.Position.z);
         if (!nextNode4.Equals(previousNode))
             ExpandNetwork(nextNode4, currentNode);
 
@@ -69,14 +71,14 @@ public class Pathfinder : MonoBehaviour
 
     public class Node
     {
-        public Vector2Int Position { get; set; }
-        public List<Node> Children { get;}
+        public Vector3Int Position { get; set; }
+        public List<Node> Children { get; }
 
         private int nextNodeId = 0;
 
-        public Node(int x, int y)
+        public Node(int x, int y, int z)
         {
-            Position = new Vector2Int(x, y);
+            Position = new Vector3Int(x, y, z);
             Children = new List<Node>();
         }
 
@@ -88,11 +90,11 @@ public class Pathfinder : MonoBehaviour
             return (HasNext()) ? this.Next().GetPath(path) : path;
         }
 
-        public bool HasNext() => Next() == null;
+        public bool HasNext() => Next() != null;
 
         public void Switch()
         {
-            if(nextNodeId < Children.Count - 1)
+            if (nextNodeId < Children.Count - 1)
             {
                 nextNodeId++;
             }
@@ -102,11 +104,18 @@ public class Pathfinder : MonoBehaviour
             }
         }
 
-        public Node Next() => (EndOfPath()) ?  null : Children[nextNodeId];
+        public Node Next() => (EndOfPath()) ? null : Children[nextNodeId];
 
         public bool EndOfPath() => Children.Count == 0;
 
         public bool IsIntersection() => Children.Count > 1;
+
+        public Vector3 GetWorldPos(Tilemap map)
+        {
+            Vector3 worldPos = map.CellToWorld(Position);
+            worldPos.y += 0.25f;
+            return worldPos;
+        }
 
         public override bool Equals(object obj)
         {

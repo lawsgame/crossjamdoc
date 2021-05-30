@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEditor;
 
 [CustomEditor(typeof(Pathfinder))]
 public class PathFinderEditor : Editor
@@ -16,7 +14,7 @@ public class PathFinderEditor : Editor
 
     private void RebuildNetwork(Pathfinder pathfinder)
     {
-        if(GUILayout.Button("Rebuild Network"))
+        if (GUILayout.Button("Rebuild Network"))
         {
             pathfinder.BuildNetwork();
         }
