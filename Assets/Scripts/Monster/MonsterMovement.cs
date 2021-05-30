@@ -12,9 +12,16 @@ public class MonsterMovement : MonoBehaviour
     private Tilemap worldMap;
     private Pathfinder pathfinder;
     private Monster monster;
+    private bool paused = false;
+    private bool moving = false;
 
 
     void Start()
+    {
+        
+    }
+
+    public void initialize()
     {
         monster = GetComponent<Monster>();
         pathfinder = GameManager.GetComponent<Pathfinder>();
@@ -22,6 +29,10 @@ public class MonsterMovement : MonoBehaviour
     }
 
     public void StartMoving() => StartCoroutine(Move());
+
+    public void Pause() => paused = true;
+    public void Resume() => paused = false;
+    public bool Moving() => moving;
 
     IEnumerator Move()
     {
@@ -33,6 +44,8 @@ public class MonsterMovement : MonoBehaviour
         {
             while (currentNode.HasNext())
             {
+                moving = true;
+                paused = false;
                 Node nextNode = currentNode.Next();
                 
                 Vector3 nextNodeWorldPos = nextNode.GetWorldPos(worldMap);
@@ -41,8 +54,11 @@ public class MonsterMovement : MonoBehaviour
                 speedVector = SPEED_FACTOR * monster.movementSpeed * speedVector;
                 while (Vector2.Distance(transform.position, nextNodeWorldPos) > speedVector.magnitude)
                 {
-                    Debug.Log(Vector2.Distance(transform.position, nextNodeWorldPos) + "?> " + speedVector.magnitude);
-                    transform.position = new Vector3(transform.position.x + speedVector.x, transform.position.y + speedVector.y, transform.position.z);
+                    if (!paused)
+                    {
+                        Debug.Log(Vector2.Distance(transform.position, nextNodeWorldPos) + "?> " + speedVector.magnitude);
+                        transform.position = new Vector3(transform.position.x + speedVector.x, transform.position.y + speedVector.y, transform.position.z);
+                    }
                     yield return null;
                 }
                 currentNode = nextNode;
@@ -50,6 +66,7 @@ public class MonsterMovement : MonoBehaviour
             }
             transform.position = currentNode.GetWorldPos(worldMap);
         }
+        moving = false;
     }
 
 }
