@@ -6,26 +6,28 @@ public class Factory : MonoBehaviour
 {
     public GameObject monster;
     public GameObject gameManager;
-    private GameObject monstersWaiting;
+
+    private int[] currentRessourceMonster;
+    private Queue<int[]> monstersWaiting;
 
     public int recondite;
-    public int speedRessource;
-    public int healthRessource;
-    public int seekRessource;
-    public int visionRessource;
+    public int movementSpeedRessource;
+    public int hitPointsRessource;
+    public int carryCapacityRessource;
+    public int lineOfSightRessource;
     public int strengthRessource;
 
     // Start is called before the first frame update
     void Start()
     {
-        InstantiateMonster();
+        monstersWaiting = new Queue<int[]>();
+        CreateRessourceMonster();
+
     }
 
-    void InstantiateMonster()
+    void CreateRessourceMonster()
     {
-        GameObject gjm = (GameObject) Instantiate(monster);
-        gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
-        monstersWaiting = gjm;
+        currentRessourceMonster = new int[6] { 0, 0, 0, 0, 0, 0 };
     }
 
     // Update is called once per frame
@@ -34,15 +36,63 @@ public class Factory : MonoBehaviour
         
     }
 
-    public void spawnMonster()
+    public void createMonster()
     {
-        monstersWaiting.GetComponent<MonsterMovement>().initialize();
-        monstersWaiting.GetComponent<MonsterMovement>().StartMoving();
-        InstantiateMonster();
+        if (currentRessourceMonster[0]>0)
+        {
+            monstersWaiting.Enqueue(currentRessourceMonster);
+            CreateRessourceMonster();
+        }
     }
 
-    public void addSpeed()
+    public void spawnMonster()
     {
-        monstersWaiting.GetComponent<Monster>().movementSpeed += 2;
+        if (monstersWaiting.Count > 0)
+        {
+            GameObject gjm = (GameObject)Instantiate(monster);
+            gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
+            gjm.GetComponent<MonsterMovement>().initialize();
+            gjm.GetComponent<MonsterMovement>().StartMoving();
+
+            Monster m = gjm.GetComponent<Monster>();
+            m.movementSpeed += monstersWaiting.Peek()[1];
+            m.hitPoints += monstersWaiting.Peek()[2];
+            m.carryCapacity += monstersWaiting.Peek()[3];
+            m.lineOfSight += monstersWaiting.Peek()[4];
+            m.strength += monstersWaiting.Peek()[5];
+
+            monstersWaiting.Dequeue();
+        }
+        
+    }
+
+    public void addRecondite()
+    {
+        currentRessourceMonster[0] += 1;
+    }
+
+    public void addMovementSpeed()
+    {
+        currentRessourceMonster[1] += 1;
+    }
+
+    public void addHitPoints()
+    {
+        currentRessourceMonster[2] += 1;
+    }
+
+    public void addCarryCapacity()
+    {
+        currentRessourceMonster[3] += 1;
+    }
+
+    public void addLineOfSight()
+    {
+        currentRessourceMonster[4] += 1;
+    }
+
+    public void addStrength()
+    {
+        currentRessourceMonster[5] += 1;
     }
 }
