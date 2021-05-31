@@ -6,7 +6,7 @@ public class Factory : MonoBehaviour
 {
     public GameObject monster;
     public GameObject gameManager;
-    private List<GameObject> monstersWaiting;
+    private GameObject monstersWaiting;
 
     public int recondite;
     public int speedRessource;
@@ -18,14 +18,14 @@ public class Factory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InstantiateMonster();
     }
 
     void InstantiateMonster()
     {
-        monstersWaiting.Add((GameObject) Instantiate(monster));
-        Debug.Log(monstersWaiting.Count);
-        monstersWaiting[0].GetComponent<Monster>().movementSpeed = 20;
+        GameObject gjm = (GameObject) Instantiate(monster);
+        gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
+        monstersWaiting = gjm;
     }
 
     // Update is called once per frame
@@ -36,6 +36,13 @@ public class Factory : MonoBehaviour
 
     public void spawnMonster()
     {
+        monstersWaiting.GetComponent<MonsterMovement>().initialize();
+        monstersWaiting.GetComponent<MonsterMovement>().StartMoving();
         InstantiateMonster();
+    }
+
+    public void addSpeed()
+    {
+        monstersWaiting.GetComponent<Monster>().movementSpeed += 2;
     }
 }

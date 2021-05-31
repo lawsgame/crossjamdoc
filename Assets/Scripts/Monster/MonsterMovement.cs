@@ -7,7 +7,7 @@ public class MonsterMovement : MonoBehaviour
 {
     private readonly float SPEED_FACTOR = 0.001f;
 
-    [SerializeField] private GameObject GameManager;
+    public GameObject GameManager;
 
     private Tilemap worldMap;
     private Pathfinder pathfinder;
