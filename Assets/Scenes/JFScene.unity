@@ -587,6 +587,15 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: -5, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
@@ -605,6 +614,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 165f02cd3d974724c9ee18d3abb33b04, type: 2}
   - m_RefCount: 29
     m_Data: {fileID: 11400000, guid: 260467523c99b9c4e948b6f4c95a781a, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: bbe3b9eaeeaca0c45b34483f59e7392b, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 4865333555714345506, guid: b13186bce28280b4badb03e0801332c4,
@@ -629,8 +640,10 @@ Tilemap:
   - m_RefCount: 29
     m_Data: {fileID: -1938238003184541082, guid: b13186bce28280b4badb03e0801332c4,
       type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: f67026b7bb451ba4fa5d8bf4e4ab9345, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 42
+  - m_RefCount: 43
     m_Data:
       e00: 1
       e01: 0
@@ -649,7 +662,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 42
+  - m_RefCount: 43
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -722,7 +735,8 @@ MonoBehaviour:
   hitPoints: 2
   carryCapacity: 2
   lineOfSight: 2
-  movementSpeed: 15
+  movementSpeed: 3
+  strength: 0
 --- !u!212 &551284961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -875,8 +889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61918c7eeba06b42a19b54820648677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initTileX: -5
-  initTileY: 2
   worldMap: {fileID: 130835770}
 --- !u!114 &1473048517
 MonoBehaviour:
@@ -1074,6 +1086,7 @@ MonoBehaviour:
   carryCapacity: 5
   lineOfSight: 3
   movementSpeed: 10
+  strength: 5
 --- !u!114 &2080374752
 MonoBehaviour:
   m_ObjectHideFlags: 0
