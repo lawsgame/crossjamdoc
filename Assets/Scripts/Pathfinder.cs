@@ -6,24 +6,27 @@ public class Pathfinder : MonoBehaviour
 {
     public readonly int TILE_Z = 0;
 
-    [SerializeField] private int initTileX;
-    [SerializeField] private int initTileY;
     [SerializeField] private Tilemap worldMap;
 
     private Node rootNode;
-    private Dictionary<Vector3Int, Node> network;
+    private Dictionary<Vector3Int, Node> network = null;
 
     public Node RootNode => rootNode;
     public Tilemap WorldMap => worldMap;
 
-    void Awake()
+
+    public Node FindNode(Vector3Int cellpos)
     {
-        BuildNetwork();
+        if(network == null)
+            BuildNetwork();
+        return network[cellpos];
     }
 
     public void BuildNetwork()
     {
-        rootNode = new Node(initTileX, initTileY, TILE_Z);
+
+        Debug.Log(string.Format("Root node location used {0}", Data.rootNodeLocation));
+        rootNode = new Node(Data.rootNodeLocation.x, Data.rootNodeLocation.y, TILE_Z);
         network = new Dictionary<Vector3Int, Node>();
         ExpandNetwork(rootNode, null);
 
@@ -33,8 +36,6 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
-
-    public Node FindNode(Vector3Int cellpos) => network[cellpos];
 
 
     void ExpandNetwork(Node currentNode, Node previousNode)
