@@ -6,27 +6,24 @@ public class Factory : MonoBehaviour
 {
     public GameObject monster;
     public GameObject gameManager;
-    private List<GameObject> monstersWaiting;
+
+    private enum Ressource { RECONDITE, SODA, MEAT, WEED, FUNGUS, PURPLE_CRISTAL};
+
+    private Queue<Ressource> monsterWaiting;
 
     public int recondite;
-    public int speedRessource;
-    public int healthRessource;
-    public int seekRessource;
-    public int visionRessource;
-    public int strengthRessource;
+    public int soda;
+    public int meat;
+    public int weed;
+    public int fungus;
+    public int purpleCristal;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        NewMonster();
     }
 
-    void InstantiateMonster()
-    {
-        monstersWaiting.Add((GameObject) Instantiate(monster));
-        Debug.Log(monstersWaiting.Count);
-        monstersWaiting[0].GetComponent<Monster>().movementSpeed = 20;
-    }
 
     // Update is called once per frame
     void Update()
@@ -34,8 +31,74 @@ public class Factory : MonoBehaviour
         
     }
 
-    public void spawnMonster()
+    public void NewMonster()
     {
-        InstantiateMonster();
+        monsterWaiting = new Queue<Ressource>();
+    }
+
+    public void SpawnMonster()
+    {
+        if (monsterWaiting.Count >= 3)
+        {
+            GameObject gjm = (GameObject)Instantiate(monster);
+            gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
+            gjm.GetComponent<MonsterMovement>().initialize();
+            gjm.GetComponent<MonsterMovement>().StartMoving();
+
+            Monster m = gjm.GetComponent<Monster>();
+
+            foreach (Ressource ressource in monsterWaiting)
+            {
+                switch (ressource)
+                {
+                    case Ressource.FUNGUS:
+                        m.maxHealth += 1;
+                        break;
+
+                    case Ressource.SODA:
+                        m.movementSpeed += 1;
+                        break;
+                }
+            }
+
+            NewMonster();
+        }
+        
+    }
+
+    private void addItem(Ressource ressource)
+    {
+        if (monsterWaiting.Count >= 3) monsterWaiting.Dequeue();
+        monsterWaiting.Enqueue(ressource);
+    }
+
+    public void addRecondite()
+    {
+        addItem(Ressource.RECONDITE);
+    }
+
+    public void addMovementSpeed()
+    {
+        addItem(Ressource.SODA);
+    }
+
+    public void addHitPoints()
+    {
+        addItem(Ressource.FUNGUS);
+    }
+
+    public void addCarryCapacity()
+    {
+        addItem(Ressource.WEED);
+    }
+
+    public void addLineOfSight()
+    {
+        addItem(Ressource.PURPLE_CRISTAL);
+    }
+
+    public void addStrength()
+    {
+        addItem(Ressource.MEAT);
     }
 }
