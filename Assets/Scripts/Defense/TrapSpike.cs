@@ -38,8 +38,12 @@ public class TrapSpike : MonoBehaviour, ITickable
 
     public void Tick()
     {
-        
-        affectedMonsters.ForEach(x => x.GetHurt(damage));
-        affectedMonsters.RemoveAll(x => !x.gameObject.activeSelf);
+        Monster[] monsters = affectedMonsters.ToArray();
+        //ecarter les monstres qui pourraient devenir null pendant un foreach
+        affectedMonsters.RemoveAll(x => x.health <= damage);
+        for(int i = 0; i< monsters.Length; i++)
+        {
+            monsters[i].GetHurt(damage);
+        } 
     }
 }

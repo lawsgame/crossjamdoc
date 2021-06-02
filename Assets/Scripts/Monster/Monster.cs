@@ -25,6 +25,7 @@ public class Monster : MonoBehaviour
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        Debug.Log("dead");
+        Destroy(gameObject);
     }
 }
