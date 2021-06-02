@@ -36,6 +36,16 @@ public class Factory : MonoBehaviour
         
     }
 
+    public void CancelMonster()
+    {
+        movementSpeedRessource += currentRessourceMonster[1];
+        hitPointsRessource += currentRessourceMonster[2];
+        carryCapacityRessource += currentRessourceMonster[3];
+        lineOfSightRessource += currentRessourceMonster[4];
+        strengthRessource += currentRessourceMonster[5];
+        CreateRessourceMonster();
+    }
+
     public void createMonster()
     {
         if (currentRessourceMonster[0]>0)
@@ -68,31 +78,55 @@ public class Factory : MonoBehaviour
 
     public void addRecondite()
     {
-        currentRessourceMonster[0] += 1;
+        if (recondite > 0)
+        {
+            recondite -= 1;
+            currentRessourceMonster[0] += 1;
+        }
     }
 
     public void addMovementSpeed()
     {
-        currentRessourceMonster[1] += 1;
+        if (movementSpeedRessource > 0)
+        {
+            movementSpeedRessource -= 1;
+            currentRessourceMonster[1] += 1;
+        }
     }
 
     public void addHitPoints()
     {
-        currentRessourceMonster[2] += 1;
+        if (hitPointsRessource > 0)
+        {
+            hitPointsRessource -= 1;
+            currentRessourceMonster[2] += 1;
+        }
     }
 
     public void addCarryCapacity()
     {
-        currentRessourceMonster[3] += 1;
+        if (carryCapacityRessource > 0)
+        {
+            carryCapacityRessource -= 1;
+            currentRessourceMonster[3] += 1;
+        }
     }
 
     public void addLineOfSight()
     {
-        currentRessourceMonster[4] += 1;
+        if (lineOfSightRessource > 0)
+        {
+            lineOfSightRessource -= 1;
+            currentRessourceMonster[4] += 1;
+        }
     }
 
     public void addStrength()
     {
-        currentRessourceMonster[5] += 1;
+        if (strengthRessource > 0)
+        {
+            strengthRessource -= 1;
+            currentRessourceMonster[5] += 1;
+        }
     }
 }
