@@ -4,16 +4,20 @@ using UnityEngine.Tilemaps;
 
 public class Pathfinder : MonoBehaviour
 {
-    public readonly int TILE_Z = 0;
+    public static readonly int TILE_Z = 0;
 
     [SerializeField] private Tilemap worldMap;
 
-    private Node rootNode;
+    private Node rootNode = null;
     private Dictionary<Vector3Int, Node> network = null;
 
-    public Node RootNode => rootNode;
     public Tilemap WorldMap => worldMap;
-
+    
+    public void Start()
+    {
+        if (network == null)
+            BuildNetwork();
+    }
 
     public Node FindNode(Vector3Int cellpos)
     {
@@ -22,11 +26,11 @@ public class Pathfinder : MonoBehaviour
         return network[cellpos];
     }
 
-    public void BuildNetwork()
+    void BuildNetwork()
     {
 
-        Debug.Log(string.Format("Root node location used {0}", Data.rootNodeLocation));
-        rootNode = new Node(Data.rootNodeLocation.x, Data.rootNodeLocation.y, TILE_Z);
+        rootNode = FindRootNode();
+        Debug.Log(string.Format("Build path network from root note at {0}", rootNode.Position));
         network = new Dictionary<Vector3Int, Node>();
         ExpandNetwork(rootNode, null);
 
@@ -36,7 +40,32 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
+    public Node FindRootNode()
+    {
+        if(rootNode != null)
+        {
+            return rootNode;
+        }
 
+        // scan through the whole tilemap to found the first node with the status of Root Node
+
+        foreach (var pos in worldMap.cellBounds.allPositionsWithin)
+        {
+            WorldTile worldTile;
+            if (worldMap.HasTile(pos))
+            {
+                worldTile = worldMap.GetTile<WorldTile>(pos);
+                if (worldTile.RootNode)
+                {
+
+                    Node foundRootNode = new Node(pos.x, pos.y, pos.z);
+                    Debug.Log(string.Format("find root node at {0}", foundRootNode.Position));
+                    return foundRootNode;
+                }
+            }
+        }
+        return null;
+    }
 
     void ExpandNetwork(Node currentNode, Node previousNode)
     {
@@ -116,6 +145,20 @@ public class Pathfinder : MonoBehaviour
             Vector3 worldPos = map.CellToWorld(Position);
             worldPos.y += 0.25f;
             return worldPos;
+        }
+
+        public Direction GetDirection()
+        {
+            Vector3Int dir = Position - Next().Position;
+            if (dir.x == -1)
+                return Direction.West;
+            else if (dir.x == 1)
+                return Direction.East;
+            else if (dir.y == -1)
+                return Direction.South;
+            else if (dir.y == -1)
+                return Direction.North;
+            return Direction.None;
         }
 
         public override bool Equals(object obj)

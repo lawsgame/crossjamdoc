@@ -37,7 +37,7 @@ public class MonsterMovement : MonoBehaviour
     IEnumerator Move()
     {
         Vector3Int initTilePos = worldMap.WorldToCell(transform.position);
-        Debug.Log("monster node: "+initTilePos.ToString());
+        Debug.Log("Begin movement => monster starting node: "+initTilePos.ToString());
         Node currentNode = pathfinder.FindNode(initTilePos);
         Vector3 currentNodeWorldPos = transform.position;
         if (currentNode != null)

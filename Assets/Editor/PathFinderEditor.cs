@@ -9,14 +9,6 @@ public class PathFinderEditor : Editor
         base.OnInspectorGUI();
         Pathfinder pathfinder = target as Pathfinder;
 
-        RebuildNetwork(pathfinder);
     }
 
-    private void RebuildNetwork(Pathfinder pathfinder)
-    {
-        if (GUILayout.Button("Rebuild Network"))
-        {
-            pathfinder.BuildNetwork();
-        }
-    }
 }
