@@ -66,7 +66,7 @@ public class Factory : MonoBehaviour
 
             Monster m = gjm.GetComponent<Monster>();
             m.movementSpeed += monstersWaiting.Peek()[1];
-            m.hitPoints += monstersWaiting.Peek()[2];
+            m.maxHealth += monstersWaiting.Peek()[2];
             m.carryCapacity += monstersWaiting.Peek()[3];
             m.lineOfSight += monstersWaiting.Peek()[4];
             m.strength += monstersWaiting.Peek()[5];
