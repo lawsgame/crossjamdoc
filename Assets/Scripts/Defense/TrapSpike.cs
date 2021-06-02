@@ -6,7 +6,9 @@ using UnityEngine;
 public class TrapSpike : MonoBehaviour, ITickable
 {
     [SerializeField]
-    readonly int damage = 1;
+     int damage = 1;
+    [SerializeField]
+     bool reusable = true;
     readonly List<Monster> affectedMonsters = new List<Monster>();
 
     public void Start()
@@ -38,12 +40,19 @@ public class TrapSpike : MonoBehaviour, ITickable
 
     public void Tick()
     {
-        Monster[] monsters = affectedMonsters.ToArray();
-        //ecarter les monstres qui pourraient devenir null pendant un foreach
-        affectedMonsters.RemoveAll(x => x.health <= damage);
-        for(int i = 0; i< monsters.Length; i++)
+        if(affectedMonsters.Count > 0)
         {
-            monsters[i].GetHurt(damage);
-        } 
+            Monster[] monsters = affectedMonsters.ToArray();
+            //ecarter les monstres qui pourraient devenir null pendant un foreach
+            affectedMonsters.RemoveAll(x => x.health <= damage);
+            for(int i = 0; i< monsters.Length; i++)
+            {
+                monsters[i].GetHurt(damage);
+            }
+            if (!reusable)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

@@ -51,6 +51,10 @@ public class TrapPressure : MonoBehaviour
             {
                 monsters[i].GetHurt(damage);
             }
+            if (!reusable)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
