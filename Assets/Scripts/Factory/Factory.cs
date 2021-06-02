@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,13 @@ public class Factory : MonoBehaviour
 
     private Queue<Ressource> monsterWaiting;
 
+    public GameObject reconditeTxt;
+    public GameObject sodaTxt;
+    public GameObject meatTxt;
+    public GameObject weedTxt;
+    public GameObject fungusTxt;
+    public GameObject purpleCristalTxt;
+
     public int recondite;
     public int soda;
     public int meat;
@@ -22,6 +30,7 @@ public class Factory : MonoBehaviour
     void Start()
     {
         NewMonster();
+        UpdateTxtRessources();
     }
 
 
@@ -29,6 +38,23 @@ public class Factory : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void UpdateTxtRessources()
+    {
+            reconditeTxt.GetComponent<UnityEngine.UI.Text>().text = (recondite - Count(Ressource.RECONDITE)).ToString();
+            sodaTxt.GetComponent<UnityEngine.UI.Text>().text = (soda - Count(Ressource.SODA)).ToString();
+            fungusTxt.GetComponent<UnityEngine.UI.Text>().text = (fungus - Count(Ressource.FUNGUS)).ToString();       
+    }
+
+    private int Count(Ressource ressource)
+    {
+        int val = 0;
+        foreach (Ressource r in monsterWaiting)
+        {
+            if (r.Equals(ressource)) val++;
+        }
+        return val;
     }
 
     public void NewMonster()
@@ -53,6 +79,7 @@ public class Factory : MonoBehaviour
                 {
                     case Ressource.FUNGUS:
                         m.maxHealth += 1;
+                        m.health += 1;
                         break;
 
                     case Ressource.SODA:
@@ -66,39 +93,40 @@ public class Factory : MonoBehaviour
         
     }
 
-    private void addItem(Ressource ressource)
+    void AddItem(Ressource ressource)
     {
         if (monsterWaiting.Count >= 3) monsterWaiting.Dequeue();
         monsterWaiting.Enqueue(ressource);
+        UpdateTxtRessources();
     }
 
-    public void addRecondite()
+    public void AddRecondite()
     {
-        addItem(Ressource.RECONDITE);
+        AddItem(Ressource.RECONDITE);
     }
 
-    public void addMovementSpeed()
+    public void AddSoda()
     {
-        addItem(Ressource.SODA);
+        AddItem(Ressource.SODA);
     }
 
-    public void addHitPoints()
+    public void AddFungus()
     {
-        addItem(Ressource.FUNGUS);
+        AddItem(Ressource.FUNGUS);
     }
 
-    public void addCarryCapacity()
+    public void AddWeed()
     {
-        addItem(Ressource.WEED);
+        AddItem(Ressource.WEED);
     }
 
-    public void addLineOfSight()
+    public void AddPurpleCristal()
     {
-        addItem(Ressource.PURPLE_CRISTAL);
+        AddItem(Ressource.PURPLE_CRISTAL);
     }
 
-    public void addStrength()
+    public void AddMeat()
     {
-        addItem(Ressource.MEAT);
+        AddItem(Ressource.MEAT);
     }
 }
