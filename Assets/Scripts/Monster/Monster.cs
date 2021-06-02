@@ -7,12 +7,13 @@ public class Monster : MonoBehaviour
     public int lineOfSight;
     public int movementSpeed;
     public int strength;
-    int health;
+    public int health;
 
     void Start()
     {
         transform.tag = "Player";
         health = maxHealth;
+
     }
 
     public void GetHurt(int damage)
@@ -24,6 +25,6 @@ public class Monster : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

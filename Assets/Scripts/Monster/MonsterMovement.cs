@@ -56,7 +56,7 @@ public class MonsterMovement : MonoBehaviour
                 {
                     if (!paused)
                     {
-                        Debug.Log(Vector2.Distance(transform.position, nextNodeWorldPos) + "?> " + speedVector.magnitude);
+                        //Debug.Log(Vector2.Distance(transform.position, nextNodeWorldPos) + "?> " + speedVector.magnitude);
                         transform.position = new Vector3(transform.position.x + speedVector.x, transform.position.y + speedVector.y, transform.position.z);
                     }
                     yield return null;
