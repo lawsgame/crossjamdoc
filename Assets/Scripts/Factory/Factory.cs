@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Factory : MonoBehaviour
 {
     public GameObject monster;
     public GameObject gameManager;
 
-    private enum Ressource { RECONDITE, SODA, MEAT, WEED, FUNGUS, PURPLE_CRISTAL};
+    public enum Ressource { RECONDITE, SODA, MEAT, WEED, FUNGUS, PURPLE_CRISTAL};
 
     private Queue<Ressource> monsterWaiting;
 
@@ -26,11 +27,13 @@ public class Factory : MonoBehaviour
     public int fungus;
     public int purpleCristal;
 
+    public GameObject pannel;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         NewMonster();
-        UpdateTxtRessources();
     }
 
 
@@ -42,9 +45,9 @@ public class Factory : MonoBehaviour
 
     void UpdateTxtRessources()
     {
-            reconditeTxt.GetComponent<UnityEngine.UI.Text>().text = (recondite - Count(Ressource.RECONDITE)).ToString();
-            sodaTxt.GetComponent<UnityEngine.UI.Text>().text = (soda - Count(Ressource.SODA)).ToString();
-            fungusTxt.GetComponent<UnityEngine.UI.Text>().text = (fungus - Count(Ressource.FUNGUS)).ToString();       
+        reconditeTxt.GetComponent<Text>().text = (recondite - Count(Ressource.RECONDITE)).ToString();
+        sodaTxt.GetComponent<Text>().text = (soda - Count(Ressource.SODA)).ToString();
+        fungusTxt.GetComponent<Text>().text = (fungus - Count(Ressource.FUNGUS)).ToString();       
     }
 
     private int Count(Ressource ressource)
@@ -60,11 +63,12 @@ public class Factory : MonoBehaviour
     public void NewMonster()
     {
         monsterWaiting = new Queue<Ressource>();
+        UpdateTxtRessources();
     }
 
     public void SpawnMonster()
     {
-        if (monsterWaiting.Count >= 3)
+        if (monsterWaiting.Count >= 3 || true)
         {
             GameObject gjm = (GameObject)Instantiate(monster);
             gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
@@ -77,12 +81,18 @@ public class Factory : MonoBehaviour
             {
                 switch (ressource)
                 {
+                    case Ressource.RECONDITE:
+                        recondite--;
+                        break;
+
                     case Ressource.FUNGUS:
+                        fungus--;
                         m.maxHealth += 1;
                         m.health += 1;
                         break;
 
                     case Ressource.SODA:
+                        soda--;
                         m.movementSpeed += 1;
                         break;
                 }
@@ -97,8 +107,13 @@ public class Factory : MonoBehaviour
     {
         if (monsterWaiting.Count >= 3) monsterWaiting.Dequeue();
         monsterWaiting.Enqueue(ressource);
+
+        pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
+
         UpdateTxtRessources();
     }
+
+   
 
     public void AddRecondite()
     {
