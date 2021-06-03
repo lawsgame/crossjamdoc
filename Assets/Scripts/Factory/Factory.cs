@@ -104,37 +104,36 @@ public class Factory : MonoBehaviour
         pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
 
         UpdateTxtRessources();
+       
     }
-
-   
 
     public void AddRecondite()
     {
-        AddItem(Ressource.RECONDITE);
+        if (recondite - Count(Ressource.RECONDITE) > 0) AddItem(Ressource.RECONDITE);
     }
 
     public void AddSoda()
     {
-        AddItem(Ressource.SODA);
+        if (soda - Count(Ressource.SODA) > 0) AddItem(Ressource.SODA);
     }
 
     public void AddFungus()
     {
-        AddItem(Ressource.FUNGUS);
+        if (fungus - Count(Ressource.FUNGUS) > 0) AddItem(Ressource.FUNGUS);
     }
 
     public void AddWeed()
     {
-        AddItem(Ressource.WEED);
+        if (weed - Count(Ressource.WEED) > 0) AddItem(Ressource.WEED);
     }
 
     public void AddPurpleCristal()
     {
-        AddItem(Ressource.PURPLE_CRISTAL);
+        if (purpleCristal - Count(Ressource.PURPLE_CRISTAL) > 0) AddItem(Ressource.PURPLE_CRISTAL);
     }
 
     public void AddMeat()
     {
-        AddItem(Ressource.MEAT);
+        if (meat - Count(Ressource.MEAT) > 0) AddItem(Ressource.MEAT);
     }
 }
