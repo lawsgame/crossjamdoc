@@ -36,13 +36,6 @@ public class Factory : MonoBehaviour
         NewMonster();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void UpdateTxtRessources()
     {
         reconditeTxt.GetComponent<Text>().text = (recondite - Count(Ressource.RECONDITE)).ToString();
@@ -97,8 +90,8 @@ public class Factory : MonoBehaviour
                         break;
                 }
             }
-
             NewMonster();
+            pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
         }
         
     }
