@@ -66,8 +66,7 @@ public class Factory : MonoBehaviour
             GameObject gjm = (GameObject)Instantiate(monster);
             gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
             gjm.GetComponent<MonsterMovement>().initialize();
-            gjm.GetComponent<MonsterMovement>().StartMoving();
-
+            
             Monster m = gjm.GetComponent<Monster>();
 
             foreach (Ressource ressource in monsterWaiting)
@@ -92,6 +91,8 @@ public class Factory : MonoBehaviour
             }
             NewMonster();
             pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
+
+            gjm.GetComponent<MonsterMovement>().StartMoving();
         }
         
     }
