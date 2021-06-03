@@ -1,14 +1,16 @@
-﻿using Assets.Scripts;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class TrapSpike : MonoBehaviour, ITickable
+public class TrapPressure : MonoBehaviour
+
 {
     [SerializeField]
-     int damage = 1;
+    readonly int damage = 10;
     [SerializeField]
-     bool reusable = true;
+    readonly int nbMonstersToExplode = 3;
+    [SerializeField]
+    readonly bool reusable = false;
     readonly List<Monster> affectedMonsters = new List<Monster>();
 
     public void Start()
@@ -24,7 +26,7 @@ public class TrapSpike : MonoBehaviour, ITickable
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.LogWarning("collide");
-        if(collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player"))
         {
             affectedMonsters.Add(collision.transform.GetComponent<Monster>());
         }
@@ -40,12 +42,12 @@ public class TrapSpike : MonoBehaviour, ITickable
 
     public void Tick()
     {
-        if(affectedMonsters.Count > 0)
+        if(affectedMonsters.Count >= nbMonstersToExplode)
         {
             Monster[] monsters = affectedMonsters.ToArray();
             //ecarter les monstres qui pourraient devenir null pendant un foreach
             affectedMonsters.RemoveAll(x => x.health <= damage);
-            for(int i = 0; i< monsters.Length; i++)
+            for (int i = 0; i < monsters.Length; i++)
             {
                 monsters[i].GetHurt(damage);
             }
