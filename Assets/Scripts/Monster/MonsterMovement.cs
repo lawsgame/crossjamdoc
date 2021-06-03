@@ -39,7 +39,6 @@ public class MonsterMovement : MonoBehaviour
         Vector3Int initTilePos = worldMap.WorldToCell(transform.position);
         Debug.Log("Begin movement => monster starting node: "+initTilePos.ToString());
         Node currentNode = pathfinder.FindNode(initTilePos);
-        Vector3 currentNodeWorldPos = transform.position;
         if (currentNode != null)
         {
             while (currentNode.HasNext())
@@ -49,21 +48,20 @@ public class MonsterMovement : MonoBehaviour
                 Node nextNode = currentNode.Next();
                 
                 Vector3 nextNodeWorldPos = nextNode.GetWorldPos(worldMap);
-                Vector3 speedVector = (nextNodeWorldPos - currentNodeWorldPos);
+                Vector3 speedVector = (nextNodeWorldPos - transform.position);
                 speedVector.Normalize();
                 speedVector = SPEED_FACTOR * monster.movementSpeed * speedVector;
                 while (Vector2.Distance(transform.position, nextNodeWorldPos) > speedVector.magnitude)
                 {
                     if (!paused)
                     {
-                        Debug.Log(Vector2.Distance(transform.position, nextNodeWorldPos) + "?> " + speedVector.magnitude);
                         transform.position = new Vector3(transform.position.x + speedVector.x, transform.position.y + speedVector.y, transform.position.z);
                     }
                     yield return null;
                 }
                 currentNode = nextNode;
-                currentNodeWorldPos = nextNodeWorldPos;
             }
+            Debug.Log(string.Format("Monster reaches the end of the path, last {0} ", currentNode.ToLongString()));
             transform.position = currentNode.GetWorldPos(worldMap);
         }
         moving = false;

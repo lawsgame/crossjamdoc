@@ -9,6 +9,6 @@ namespace Assets.Scripts
     interface ITickable
     {
         
-        public void Tick();
+        void Tick();
     }
 }

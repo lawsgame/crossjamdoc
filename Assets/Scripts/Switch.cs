@@ -48,7 +48,7 @@ public class Switch : MonoBehaviour
 
     public void updateSprite()
     {
-        Direction direction = switchNode.GetDirection();
+        Direction direction = switchNode.GetDirectionTowardsNext();
         if (direction == Direction.West)
         {
             spriteRenderer.sprite = arrowDown;
@@ -56,7 +56,7 @@ public class Switch : MonoBehaviour
         else if (direction == Direction.South)
         {
             spriteRenderer.sprite = arrowDown;
-            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
         }
         else if (direction == Direction.North)
         {
@@ -65,7 +65,7 @@ public class Switch : MonoBehaviour
         else if (direction == Direction.East)
         {
             spriteRenderer.sprite = arrowUp;
-            spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
         }
     }
 
