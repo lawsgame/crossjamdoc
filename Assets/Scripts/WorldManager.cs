@@ -6,6 +6,7 @@ public class WorldManager : MonoBehaviour
 {
     public static WorldManager INSTANCE;
 
+    public float tickSec = 0.2f;
     public UnityEvent tick;
 
     void Start()
@@ -26,7 +27,7 @@ public class WorldManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(tickSec);
             tick.Invoke();
         }
     }

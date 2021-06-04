@@ -65,7 +65,7 @@ public class Factory : MonoBehaviour
         {
             GameObject gjm = (GameObject)Instantiate(monster);
             gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
-            gjm.GetComponent<MonsterMovement>().initialize();
+            gjm.GetComponent<MonsterMovement>().Initialize();
             
             Monster m = gjm.GetComponent<Monster>();
 

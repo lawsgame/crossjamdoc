@@ -9,11 +9,13 @@ public class Monster : MonoBehaviour
     public int strength;
     public int health;
 
+    MonsterMovement Movement { get; set; }
+
     void Start()
     {
         transform.tag = "Player";
         health = maxHealth;
-
+        Movement = GetComponent<MonsterMovement>();
     }
 
     public void GetHurt(int damage)

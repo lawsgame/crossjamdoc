@@ -6,11 +6,11 @@ public class TrapPressure : MonoBehaviour
 
 {
     [SerializeField]
-    readonly int damage = 10;
+    int damage = 10;
     [SerializeField]
-    readonly int nbMonstersToExplode = 3;
+    int nbMonstersToExplode = 3;
     [SerializeField]
-    readonly bool reusable = false;
+    bool reusable = false;
     readonly List<Monster> affectedMonsters = new List<Monster>();
 
     public void Start()
