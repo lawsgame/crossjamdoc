@@ -8,12 +8,12 @@ using UnityEngine;
 public class Tower : MonoBehaviour, ITickable
 {
     public enum TowerMode { SIMPLE, EXPLODING, CHANNELING, PERCING };
-    public enum TargetMode { CLOSEST, WEAKEST, STRONGEST, FIRST, RANDOM }
+    public enum TargetMode { CLOSEST, WEAKEST, STRONGEST, HEALTHIEST, HARMEST, FIRST, RANDOM }
 
     public int damage = 3;
     public bool destroyable = false;
-
-    public bool targetClosest = false;
+    public float radius = 1;
+    
     public TowerMode towerMode = TowerMode.SIMPLE;
     public TargetMode targetMode = TargetMode.FIRST;
 
@@ -69,6 +69,12 @@ public class Tower : MonoBehaviour, ITickable
                 case TargetMode.STRONGEST:
                     target = affectedMonsters.OrderByDescending(m => m.strength).First();
                     break;
+                case TargetMode.HARMEST:
+                    target = affectedMonsters.OrderBy(m => m.health).First();
+                    break;
+                case TargetMode.HEALTHIEST:
+                    target = affectedMonsters.OrderByDescending(m => m.health).First();
+                    break;
                 case TargetMode.RANDOM:
                     int choice = Random.Range(0, affectedMonsters.Count);
                     target = affectedMonsters[choice];
@@ -81,17 +87,50 @@ public class Tower : MonoBehaviour, ITickable
             switch (towerMode)
             {
                 case TowerMode.SIMPLE:
+                    DrawLazer(transform, target.transform);
                     target.GetHurt(damage);
                     break;
+
                 case TowerMode.EXPLODING:
-                    
+                    RaycastHit2D[] hits;
+                    Monster monster;
+                    hits = Physics2D.CircleCastAll(target.transform.position, radius, Vector2.right);
+                    foreach(RaycastHit2D hit in hits)
+                    {
+                        monster = hit.collider.transform.GetComponent<Monster>();
+                        if(monster != null)
+                        {
+                            DrawLazer(transform, target.transform);
+                            monster.GetHurt(damage);
+                        }
+                    }
+
+                    target.GetHurt(damage);
                     break;
+
                 case TowerMode.PERCING:
+                    target.GetHurt(damage);
+                    DrawLazer(transform, target.transform);
                     break;
+
                 case TowerMode.CHANNELING:
+                    List<Monster> knownMonsters = new List<Monster>();
+                    RaycastHit2D[] hitz;
+                    hitz = Physics2D.CircleCastAll(target.transform.position, radius, Vector2.right);
+                    foreach (RaycastHit2D hit in hitz)
+                    {
+                        hit.collider.transform.GetComponent<Monster>()?.GetHurt(damage);
+                    }
+                    DrawLazer(transform, target.transform);
+                    target.GetHurt(damage);
+                    
                     break;
             }
         }
+    }
+
+    public void DrawLazer(Transform from, Transform to)
+    {
 
     }
 }
