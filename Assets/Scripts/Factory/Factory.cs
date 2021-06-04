@@ -57,6 +57,7 @@ public class Factory : MonoBehaviour
     {
         monsterWaiting = new Queue<Ressource>();
         UpdateTxtRessources();
+        pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
     }
 
     public void SpawnMonster()
@@ -90,7 +91,6 @@ public class Factory : MonoBehaviour
                 }
             }
             NewMonster();
-            pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
 
             gjm.GetComponent<MonsterMovement>().StartMoving();
         }
@@ -102,10 +102,8 @@ public class Factory : MonoBehaviour
         if (monsterWaiting.Count >= 3) monsterWaiting.Dequeue();
         monsterWaiting.Enqueue(ressource);
 
-        pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
-
         UpdateTxtRessources();
-       
+        pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);       
     }
 
     public void AddRecondite()
