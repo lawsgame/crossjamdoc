@@ -28,7 +28,11 @@ public class MonsterMovement : MonoBehaviour
         worldMap = pathfinder.WorldMap;
     }
 
-    public void StartMoving() => StartCoroutine(Move());
+    public void StartMoving()
+    {
+        if(!Moving())
+            StartCoroutine(Move());
+    }
 
     public void Pause() => paused = true;
     public void Resume() => paused = false;
