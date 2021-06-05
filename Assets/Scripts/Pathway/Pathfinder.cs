@@ -12,8 +12,6 @@ public class Pathfinder : MonoBehaviour
     private static Vector3Int MINUS_ONE_Y = new Vector3Int(0, -1, 0);
 
     [SerializeField] private Tilemap worldMap;
-    [Tooltip("Prefab pour utilser la visualisation le path (devtool)")]
-    [SerializeField] private GameObject pathNodeItem;
 
 
     private Node rootNode = null;
@@ -25,7 +23,6 @@ public class Pathfinder : MonoBehaviour
             BuildNetwork();
         return network;
      }
-    public GameObject PathNodeItem => pathNodeItem;
 
     public void Start()
     {
@@ -104,19 +101,19 @@ public class Pathfinder : MonoBehaviour
             currentNode = network[currentNode.Position];
             if (currentNode.Children.Contains(previousNode))
             {
-                Debug.Log(string.Format("current {0} already known and is already parent of {1} => stop building path", currentNode.ToString(), previousNode.ToString()));
+                //Debug.Log(string.Format("current {0} already known and is already parent of {1} => stop building path", currentNode.ToString(), previousNode.ToString()));
                 return;
             }
             else
             {
-                Debug.Log(string.Format("current {0} already known but is not parent of previous node {1} => make previous node parent of the current and stop building path", currentNode.ToString(), previousNode.ToString()));
+                //Debug.Log(string.Format("current {0} already known but is not parent of previous node {1} => make previous node parent of the current and stop building path", currentNode.ToString(), previousNode.ToString()));
                 previousNode.Children.Add(currentNode);
                 return;
             }
             
         }
 
-        Debug.Log(string.Format("Add node " + currentNode.ToString()));
+        //Debug.Log(string.Format("Add node " + currentNode.ToString()));
         network.Add(currentNode.Position, currentNode);
         if (previousNode != null)
             previousNode.Children.Add(currentNode);

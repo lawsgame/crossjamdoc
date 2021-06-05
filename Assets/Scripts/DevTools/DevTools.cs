@@ -5,6 +5,11 @@ public class DevTools : MonoBehaviour
 {
     [SerializeField] private bool displayCellPosOnMouseClick = true;
     [SerializeField] private Tilemap WorldMap;
+    [Tooltip("Prefab pour utilser la visualisation le path")]
+    public  GameObject PathNodeItem;
+    [Tooltip("Prefab pour afficher les coordonnées des tuiles de la carte")]
+    public GameObject CellCoordRenderer;
+
 
     private Camera worldCamera;
 

@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PathNodeItem
+  - DevTools_MapCoordRenderer
+  - DevTools_PathNodeItem
   layers:
   - Default
   - TransparentFX
