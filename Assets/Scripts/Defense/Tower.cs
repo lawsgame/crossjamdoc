@@ -109,19 +109,44 @@ public class Tower : MonoBehaviour, ITickable
                     break;
 
                 case TowerMode.PERCING:
+                    RaycastHit2D[] hitc; 
+                    hitc = Physics2D.LinecastAll(transform.position, target.transform.position);
+                    foreach (RaycastHit2D hit in hitc)
+                    {
+                        monster = hit.collider.transform.GetComponent<Monster>();
+                        if (monster != null)
+                        {
+                            DrawLazer(transform, target.transform);
+                            monster.GetHurt(damage);
+                        }
+                    }
                     target.GetHurt(damage);
-                    DrawLazer(transform, target.transform);
+                    DrawLazer(transform, hitc[hitc.Length-1].transform);
+
                     break;
 
                 case TowerMode.CHANNELING:
-                    List<Monster> knownMonsters = new List<Monster>();
-                    RaycastHit2D[] hitz;
-                    hitz = Physics2D.CircleCastAll(target.transform.position, radius, Vector2.right);
-                    foreach (RaycastHit2D hit in hitz)
+                    List<Monster> knownMonsters = new List<Monster>
                     {
-                        hit.collider.transform.GetComponent<Monster>()?.GetHurt(damage);
-                    }
+                        target
+                    };
+                    RaycastHit2D[] hitz;
                     DrawLazer(transform, target.transform);
+                    for (int i = 0; i< knownMonsters.Count; i++)
+                    {
+                        hitz = Physics2D.CircleCastAll(knownMonsters[i].transform.position, radius, Vector2.right);
+                        foreach (RaycastHit2D hit in hitz)
+                        {
+                            monster = hit.collider.transform.GetComponent<Monster>();
+                            if (monster != null && !knownMonsters.Contains(monster))
+                            {
+                                DrawLazer(knownMonsters[i].transform, monster.transform);
+                                knownMonsters.Add(monster);
+                                monster.GetHurt(damage);
+                            }
+                            hit.collider.transform.GetComponent<Monster>()?.GetHurt(damage);
+                        }
+                    }
                     target.GetHurt(damage);
                     
                     break;
