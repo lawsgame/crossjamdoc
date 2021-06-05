@@ -11,7 +11,7 @@ public class MonsterMovementEditor : Editor
 
         if (GUILayout.Button("Start"))
         {
-            m.initialize();
+            m.Initialize();
             m.StartMoving();
         }
 

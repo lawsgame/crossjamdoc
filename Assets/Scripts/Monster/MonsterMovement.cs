@@ -15,13 +15,7 @@ public class MonsterMovement : MonoBehaviour
     private bool paused = false;
     private bool moving = false;
 
-
-    void Start()
-    {
-        
-    }
-
-    public void initialize()
+    public void Initialize()
     {
         monster = GetComponent<Monster>();
         pathfinder = GameManager.GetComponent<Pathfinder>();

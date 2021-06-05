@@ -23,7 +23,6 @@ public class TrapSpike : MonoBehaviour, ITickable
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.LogWarning("collide");
         if(collision.transform.CompareTag("Player"))
         {
             affectedMonsters.Add(collision.transform.GetComponent<Monster>());
