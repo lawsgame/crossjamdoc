@@ -9,10 +9,19 @@ public class MonsterMovementEditor : Editor
         base.OnInspectorGUI();
         MonsterMovement m = target as MonsterMovement;
 
-        if (GUILayout.Button("Start"))
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Play"))
         {
-            m.Initialize();
-            m.StartMoving();
+            if (m.Moving())
+            {
+                m.Resume();
+            }
+            else
+            {
+                m.Initialize();
+                m.StartMoving();
+            }
+            
         }
 
         if (GUILayout.Button("pause"))
@@ -20,10 +29,11 @@ public class MonsterMovementEditor : Editor
             m.Pause();
         }
 
-        if (GUILayout.Button("Resume"))
+        if(GUILayout.Button("Reset Position"))
         {
-            m.Resume();
+            m.ResetPosition();
         }
+        GUILayout.EndHorizontal();
     }
 
     
