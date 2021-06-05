@@ -34,7 +34,11 @@ public class Pathfinder : MonoBehaviour
     {
         if(network == null)
             BuildNetwork();
-        return network[cellpos];
+
+        Node foundNode = null;
+        if (network.ContainsKey(cellpos))
+            foundNode = network[cellpos];
+        return foundNode;
     }
 
     void BuildNetwork()
