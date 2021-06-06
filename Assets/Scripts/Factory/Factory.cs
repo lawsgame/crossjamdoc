@@ -20,6 +20,8 @@ public class Factory : MonoBehaviour
     public GameObject fungusTxt;
     public GameObject purpleCristalTxt;
 
+    public GameObject SpawnButton;
+
     public int recondite;
     public int soda;
     public int meat;
@@ -43,6 +45,12 @@ public class Factory : MonoBehaviour
         fungusTxt.GetComponent<Text>().text = (fungus - Count(Ressource.FUNGUS)).ToString();       
     }
 
+    void UpdateSpawnButton()
+    {
+
+        SpawnButton.GetComponent<Button>().interactable = (monsterWaiting.Count >= 3);
+    }
+
     private int Count(Ressource ressource)
     {
         int val = 0;
@@ -57,6 +65,7 @@ public class Factory : MonoBehaviour
     {
         monsterWaiting = new Queue<Ressource>();
         UpdateTxtRessources();
+        UpdateSpawnButton();
         pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);
     }
 
@@ -103,6 +112,7 @@ public class Factory : MonoBehaviour
         monsterWaiting.Enqueue(ressource);
 
         UpdateTxtRessources();
+        UpdateSpawnButton();
         pannel.GetComponent<RessourceBuffer>().UpdateMonsterWaitingBuffer(monsterWaiting);       
     }
 
