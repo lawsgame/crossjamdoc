@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8491569296875187922}
   - component: {fileID: 8491569296875187927}
   m_Layer: 0
-  m_Name: Switcher
+  m_Name: ArrowSwitcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 670665159
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 00c9643dc2ff3a342b2a10ddc1e73ddf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0ad9d8996316a843b0bd5f5578b17e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.32}
+    oldSize: {x: 0.48, y: 0.48}
     newSize: {x: 0.64, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

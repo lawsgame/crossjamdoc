@@ -216,7 +216,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 8d946b16bd538de45a6bd2f0c7451f20, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 96b29d82cf394e54982aed99bc5ba37d, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -844,7 +844,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 8d946b16bd538de45a6bd2f0c7451f20, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 96b29d82cf394e54982aed99bc5ba37d, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1079,7 +1079,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 8d946b16bd538de45a6bd2f0c7451f20, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 96b29d82cf394e54982aed99bc5ba37d, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -1175,10 +1175,10 @@ RectTransform:
   m_Father: {fileID: 514072964}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.634}
-  m_AnchorMax: {x: 0.23666663, y: 0.7346875}
-  m_AnchoredPosition: {x: 0.49819946, y: -29.300003}
-  m_SizeDelta: {x: 1.0013123, y: 0}
+  m_AnchorMin: {x: 0, y: 0.531}
+  m_AnchorMax: {x: 0.22888888, y: 0.6753319}
+  m_AnchoredPosition: {x: -0.0012512207, y: 0}
+  m_SizeDelta: {x: 0.0023651123, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &901142700
 MonoBehaviour:
@@ -1193,17 +1193,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 20
+    m_Right: 20
+    m_Top: 15
+    m_Bottom: 20
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
 --- !u!114 &901142701
 MonoBehaviour:
@@ -1218,15 +1218,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Sprite: {fileID: 21300000, guid: e300a2a2f5f6abb43923eb62c4d82a9c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2406,7 +2406,7 @@ GameObject:
   - component: {fileID: 1639135133}
   - component: {fileID: 1639135132}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: CancelMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
