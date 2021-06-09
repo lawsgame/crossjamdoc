@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DevTools_MapCoordRenderer
   - DevTools_PathNodeItem
+  - PickableResource
   layers:
   - Default
   - TransparentFX
