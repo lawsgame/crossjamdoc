@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RessourceBuffer : MonoBehaviour
 {
-    private List<GameObject> monsterWaitingBuffer;
+    private List<GameObject> monsterWaitingBuffer = new List<GameObject>();
 
     public GameObject imagePrefab;
 
@@ -16,13 +16,7 @@ public class RessourceBuffer : MonoBehaviour
     public Sprite fungusSprite;
     public Sprite purpleCristalSprite;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        monsterWaitingBuffer = new List<GameObject>();
-    }
 
-    // Update is called once per frame
     public void UpdateMonsterWaitingBuffer(Queue<Factory.Ressource> monsterWaiting)
     {
         foreach (GameObject go in monsterWaitingBuffer)
