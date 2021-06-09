@@ -15,11 +15,11 @@ public class Monster : MonoBehaviour
     [SerializeField] private int carriedAmount;
 
     public event Action<Ressource,int> PickResource;
+    
 
     MonsterMovement Movement { get; set; }
 
-    public int CarriedAmount => carriedAmount;
-
+    AudioSource audioSource;
 
     void Start()
     {
@@ -27,11 +27,16 @@ public class Monster : MonoBehaviour
         health = maxHealth;
         carriedAmount = 0;
         Movement = GetComponent<MonsterMovement>();
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource.isPlaying)
+            audioSource.PlayOneShot(WorldManager.INSTANCE.tracks[4]);
     }
 
     public void GetHurt(int damage)
     {
         health -= damage;
+        if (!audioSource.isPlaying)
+            audioSource.PlayOneShot(WorldManager.INSTANCE.tracks[7]);
         if (health > maxHealth) health = maxHealth;
         else if (health <= 0) Die();
     }
