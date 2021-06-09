@@ -19,6 +19,7 @@ public class Tower : MonoBehaviour, ITickable
 
     readonly List<Monster> affectedMonsters = new List<Monster>();
     LineRenderer Laser;
+    AudioSource audioSource;
     Vector3 mobOffset = new Vector3(0, 0.3f, -1);
     Vector3 towerOffset = new Vector3(0, 1.3f, -1);
 
@@ -27,6 +28,7 @@ public class Tower : MonoBehaviour, ITickable
         WorldManager.INSTANCE.tick.AddListener(Tick);
         Random.InitState(35354332);
         Laser = GetComponentInChildren<LineRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnDestroy()
@@ -88,6 +90,8 @@ public class Tower : MonoBehaviour, ITickable
             }
 
             List<Monster> damagedMonsters = new List<Monster>();
+            if (!audioSource.isPlaying)
+                audioSource.PlayOneShot(WorldManager.INSTANCE.tracks[3]);
             switch (towerMode)
             {
                 case TowerMode.SIMPLE:

@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour
 
     MonsterMovement Movement { get; set; }
 
+    AudioSource audioSource;
 
     void Start()
     {
@@ -21,11 +22,16 @@ public class Monster : MonoBehaviour
         health = maxHealth;
         carried = 0;
         Movement = GetComponent<MonsterMovement>();
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource.isPlaying)
+            audioSource.PlayOneShot(WorldManager.INSTANCE.tracks[4]);
     }
 
     public void GetHurt(int damage)
     {
         health -= damage;
+        if (!audioSource.isPlaying)
+            audioSource.PlayOneShot(WorldManager.INSTANCE.tracks[7]);
         if (health > maxHealth) health = maxHealth;
         else if (health <= 0) Die();
     }

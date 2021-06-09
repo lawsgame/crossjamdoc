@@ -10,10 +10,12 @@ public class TrapSpike : MonoBehaviour, ITickable
     [SerializeField]
      bool reusable = true;
     readonly List<Monster> affectedMonsters = new List<Monster>();
+    AudioSource audioSource;
 
     public void Start()
     {
         WorldManager.INSTANCE.tick.AddListener(Tick);
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnDestroy()
@@ -50,6 +52,8 @@ public class TrapSpike : MonoBehaviour, ITickable
             }
             if (!reusable)
             {
+                if (!audioSource.isPlaying)
+                    audioSource.PlayOneShot(WorldManager.INSTANCE.tracks[13]);
                 Destroy(gameObject);
             }
         }

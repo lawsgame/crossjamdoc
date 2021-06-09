@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Antoine.unity
+    guid: eb168cf36dc9ddf438b9f388f999b02a
   m_configObjects: {}
