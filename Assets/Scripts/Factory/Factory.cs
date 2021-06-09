@@ -30,6 +30,7 @@ public class Factory : MonoBehaviour
     public int purpleCristal;
 
     public GameObject pannel;
+
     
 
     // Start is called before the first frame update
@@ -74,10 +75,14 @@ public class Factory : MonoBehaviour
         if (monsterWaiting.Count >= 3 || true)
         {
             GameObject gjm = (GameObject)Instantiate(monster);
-            gjm.GetComponent<MonsterMovement>().GameManager = gameManager;
-            gjm.GetComponent<MonsterMovement>().Initialize();
-            
+
+            MonsterMovement mm = gjm.GetComponent<MonsterMovement>();
+            mm.GameManager = gameManager;
+            mm.Initialize();
+            mm.ResetPosition();
+
             Monster m = gjm.GetComponent<Monster>();
+            m.PickResource += addResourceToStock;
 
             foreach (Ressource ressource in monsterWaiting)
             {
@@ -144,5 +149,19 @@ public class Factory : MonoBehaviour
     public void AddMeat()
     {
         if (meat - Count(Ressource.MEAT) > 0) AddItem(Ressource.MEAT);
+    }
+
+    public void addResourceToStock(Ressource type, int quantity)
+    {
+        Debug.Log("Resource stockpilled :"+ quantity + " of "+type);
+        switch (type)
+        {
+            case Ressource.FUNGUS: fungus += quantity; break;
+            case Ressource.MEAT: meat += quantity; break;
+            case Ressource.PURPLE_CRISTAL: purpleCristal += quantity; break;
+            case Ressource.RECONDITE: recondite += quantity; break;
+            case Ressource.SODA: soda += quantity; break;
+            case Ressource.WEED: weed += quantity; break;
+        }
     }
 }

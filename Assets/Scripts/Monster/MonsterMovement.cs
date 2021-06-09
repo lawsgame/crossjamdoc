@@ -14,15 +14,12 @@ public class MonsterMovement : MonoBehaviour
     private Monster monster;
     private bool paused = false;
     private bool moving = false;
-    private Vector3 initialPostion = Vector3.zero;
 
     public void Initialize()
     {
         monster = GetComponent<Monster>();
         pathfinder = GameManager.GetComponent<Pathfinder>();
         worldMap = pathfinder.WorldMap;
-        if(initialPostion == Vector3.zero)
-            initialPostion = gameObject.transform.position;
     }
 
     public void StartMoving()
@@ -39,7 +36,7 @@ public class MonsterMovement : MonoBehaviour
     public void ResetPosition()
     {
         Stop();
-        transform.position = initialPostion;
+        transform.position = pathfinder.FindSpawn();
     }
 
     IEnumerator Move()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using static Factory;
 
 public class Monster : MonoBehaviour
 {
@@ -10,16 +12,20 @@ public class Monster : MonoBehaviour
     public int movementSpeed;
     public int strength;
     public int health;
-    public int carried;
+    [SerializeField] private int carriedAmount;
+
+    public event Action<Ressource,int> PickResource;
 
     MonsterMovement Movement { get; set; }
+
+    public int CarriedAmount => carriedAmount;
 
 
     void Start()
     {
         transform.tag = "Player";
         health = maxHealth;
-        carried = 0;
+        carriedAmount = 0;
         Movement = GetComponent<MonsterMovement>();
     }
 
@@ -39,30 +45,40 @@ public class Monster : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public bool CanCarryMore() => carryCapacity > carried;
-    public void InscrementCarryAmount() => carried++;
+    public bool CanCarryMore() => carryCapacity > carriedAmount;
 
 
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
-
-        if (otherCollider.gameObject.tag.Equals("PickableResource"))
+        PickableResource pickableResource = otherCollider.gameObject.GetComponent<PickableResource>();
+        if (pickableResource != null)
         {
             if (CanCarryMore())
             {
-                PickableResource pickableResource = otherCollider.gameObject.GetComponent<PickableResource>();
                 GameObject.Destroy(otherCollider.gameObject);
-                InscrementCarryAmount();
-
-                //TODO: add factory receiving the resources
-
-                Debug.Log("Resource picked up: " + otherCollider.gameObject.name);
+                carriedAmount++;
+                Debug.Log("Resource picked up: " + pickableResource.Type);
+                PickResource?.Invoke(pickableResource.Type, 1);
             }
             else
-            {
                 Debug.Log("Monster cannot carry more resources ");
-            }
+        }
 
+        Mines mines = otherCollider.gameObject.GetComponent<Mines>();
+        if (mines != null)
+        {
+            if (CanCarryMore())
+            {
+
+                int takenAmount = Math.Min(carryCapacity - carriedAmount, mines.Quantity);
+                mines.Quantity -= takenAmount;
+                carriedAmount += takenAmount;
+                Debug.Log("Resource gotten from mines : " + mines.Type+" ("+ takenAmount + ")");
+                PickResource?.Invoke(mines.Type, takenAmount);
+                gameObject.SetActive(false);
+            }
+            else
+                Debug.Log("Monster cannot carry more resources ");
         }
     }
 }
