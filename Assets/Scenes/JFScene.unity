@@ -1262,12 +1262,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963dca4ee3fd1ef47bbc715fea8f38cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 50
   carryCapacity: 2
   lineOfSight: 2
   movementSpeed: 3
   strength: 0
-  health: 0
+  health: 50
 --- !u!212 &551284961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1817,7 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963dca4ee3fd1ef47bbc715fea8f38cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 10
   carryCapacity: 5
   lineOfSight: 3
   movementSpeed: 10

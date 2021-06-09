@@ -11,4 +11,7 @@ public class WorldTile : Tile
     public bool Traversable => traversable;
     public bool RootNode => rootNode;
     public Direction ForcedDirection => forcedDirection;
+
+    
+
 }

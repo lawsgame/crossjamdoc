@@ -15,6 +15,7 @@ public class SimpleSwitch : Switch
         {
             case Direction.North:
                 spriteRenderer.sprite = arrowNorthUpSprite;
+                spriteRenderer.flipX = false;
                 break;
             case Direction.South:
                 spriteRenderer.sprite = arrowWestDownSprite;
@@ -22,6 +23,7 @@ public class SimpleSwitch : Switch
                 break;
             case Direction.West:
                 spriteRenderer.sprite = arrowWestDownSprite;
+                spriteRenderer.flipX = false;
                 break;
             case Direction.East:
                 spriteRenderer.sprite = arrowNorthUpSprite;
