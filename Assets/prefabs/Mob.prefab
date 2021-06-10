@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963dca4ee3fd1ef47bbc715fea8f38cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 20
   carryCapacity: 3
   lineOfSight: 3
-  movementSpeed: 1
+  movementSpeed: 4
   strength: 5
   health: 0
   carriedAmount: 0
@@ -146,7 +146,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.646
   m_Pitch: 1
   Loop: 0
   Mute: 0
