@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7792668378951884026}
   - component: {fileID: 6561701812084733538}
   m_Layer: 0
-  m_Name: mines 1
+  m_Name: mines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuantityIndicator: {fileID: 7405207030796927616}
   type: 0
-  quantity: 0
+  quantity: 10
 --- !u!50 &7792668378951884026
 Rigidbody2D:
   serializedVersion: 4
