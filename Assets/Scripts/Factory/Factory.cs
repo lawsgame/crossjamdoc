@@ -163,5 +163,6 @@ public class Factory : MonoBehaviour
             case Ressource.SODA: soda += quantity; break;
             case Ressource.WEED: weed += quantity; break;
         }
+        UpdateTxtRessources();
     }
 }

@@ -60,10 +60,12 @@ public class Monster : MonoBehaviour
         {
             if (CanCarryMore())
             {
+                
+                int takenAmount = Math.Min(carryCapacity - carriedAmount, pickableResource.Quantity);
+                carriedAmount += takenAmount;
+                Debug.Log("Resource picked : " + pickableResource.Type + " (" + takenAmount + ")");
+                PickResource?.Invoke(pickableResource.Type, takenAmount);
                 GameObject.Destroy(otherCollider.gameObject);
-                carriedAmount++;
-                Debug.Log("Resource picked up: " + pickableResource.Type);
-                PickResource?.Invoke(pickableResource.Type, 1);
             }
             else
                 Debug.Log("Monster cannot carry more resources ");

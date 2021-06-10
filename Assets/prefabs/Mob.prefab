@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  carryCapacity: 3
+  carryCapacity: 14
   lineOfSight: 3
   movementSpeed: 4
   strength: 5
