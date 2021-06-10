@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c74226ca69c6f4caeedf157bc65e95, type: 3}
   m_Name: los24
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 6504161067759716645, guid: b13186bce28280b4badb03e0801332c4,
+  m_Sprite: {fileID: 7924827952778673993, guid: 7acfee7e6e694a44388e647cb2b27fba,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
@@ -36,3 +36,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   traversable: 1
+  rootNode: 0
+  forcedDirection: 4

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c74226ca69c6f4caeedf157bc65e95, type: 3}
   m_Name: Ground
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 4af063e844166df46bc0a08d62c203d2, type: 3}
+  m_Sprite: {fileID: -2300507055499620285, guid: 7acfee7e6e694a44388e647cb2b27fba,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -35,3 +36,5 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   traversable: 0
+  rootNode: 0
+  forcedDirection: 4

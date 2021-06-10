@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c74226ca69c6f4caeedf157bc65e95, type: 3}
   m_Name: los_south_dir
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: b733aa992a55a6c4384fd1b46cc396d6, type: 3}
+  m_Sprite: {fileID: 9033759000568490781, guid: 7acfee7e6e694a44388e647cb2b27fba,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
