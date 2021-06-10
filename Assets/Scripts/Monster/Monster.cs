@@ -76,7 +76,7 @@ public class Monster : MonoBehaviour
             {
 
                 int takenAmount = Math.Min(carryCapacity - carriedAmount, mines.Quantity);
-                mines.Quantity -= takenAmount;
+                mines.ChangeQuantity(-takenAmount);
                 carriedAmount += takenAmount;
                 Debug.Log("Resource gotten from mines : " + mines.Type+" ("+ takenAmount + ")");
                 PickResource?.Invoke(mines.Type, takenAmount);

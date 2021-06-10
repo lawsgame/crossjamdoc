@@ -25,7 +25,6 @@ public class MapCoordsRenderer : MonoBehaviour
             this.cellZ = cellPos.z;
             this.tilemap = tilemap;
 
-            Debug.Log(textHolder);
             textHolder.SetText(string.Format("({0}, {1})", cellPos.x, cellPos.y));
             Vector3 worldPosition = tilemap.CellToWorld(cellPos);
             worldPosition.y += 0.25f;
