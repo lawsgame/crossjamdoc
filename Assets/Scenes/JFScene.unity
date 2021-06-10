@@ -2382,6 +2382,7 @@ GameObject:
   - component: {fileID: 1473048515}
   - component: {fileID: 1473048517}
   - component: {fileID: 1473048516}
+  - component: {fileID: 1473048518}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -2434,6 +2435,37 @@ MonoBehaviour:
     type: 3}
   CellCoordRenderer: {fileID: 3829434190236272085, guid: 08271313a40b3a846aadc3f85dd321f4,
     type: 3}
+--- !u!114 &1473048518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473048514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f965084d2f87ad49b009870cc34e2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickSec: 0.3
+  tick:
+    m_PersistentCalls:
+      m_Calls: []
+  tracks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1525954718
 GameObject:
   m_ObjectHideFlags: 0

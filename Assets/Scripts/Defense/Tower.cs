@@ -145,6 +145,10 @@ public class Tower : MonoBehaviour, ITickable
             DrawLazer(damagedMonsters.Select(x => x.transform.position + mobOffset).ToList());
             damagedMonsters.ForEach(x => x.GetHurt(damage));
         }
+        else
+        {
+            Laser.positionCount = 0;
+        }
     }
 
     public void DrawLazer(List<Vector3> positions)
